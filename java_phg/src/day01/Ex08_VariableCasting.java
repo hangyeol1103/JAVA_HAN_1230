@@ -4,7 +4,7 @@ public class Ex08_VariableCasting {
 
 	public static void main(String[] args) {
 		
-		//자동 자료형 변환
+		//자동 자료형 변환 => 작은 자료를 큰 자료에 저장
 		double num1 = 1; //int 1이 double로 자동 형변환 된 것임. 4바이트가 8바이트로 바뀌는데 문제 없음.
 		
 		int num2 = 'A'; //A의 정수값이 저장. char A가 int로 자동 형변환 된 것임. 2바이트가 4바이트로 바뀌는데 문제 없음.
@@ -16,7 +16,7 @@ public class Ex08_VariableCasting {
 		System.out.println(num2);
 		System.out.println(num3);
 		
-		//강제 자료형 변환 : 데이터 손실이 발생할 수 있기 때문에(반드시 해줘야)
+		//강제 자료형 변환 : 데이터 손실이 발생할 수 있기 때문에(반드시 해줘야) => 큰 자료를 작은 자료에 저장
 		int num4 = (int)3.14; //double 값이 int로 변하면 소수점이 사라질 수 있어서 에러가 발생
 		
 		int num5 = (int)123L; //long 값이 int로 변하면 표현하지 못하는 부분이 사라질 수 있어서 에러가 발생
