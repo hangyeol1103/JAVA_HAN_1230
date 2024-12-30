@@ -13,7 +13,6 @@ public class Ex04_VariableOverflow {
 		//언더 플로우
 		System.out.println(num2);//byte로 표현 가능한 최소값인 -128에 1을 빼면 -129가 아닌 127이 나옴.
 		
-		
 	}
 
 }
