@@ -18,7 +18,7 @@ public class Ex03_VariableNumber {
 		
 		double num5 = 3.14;
 		//소수점 20자리까지 확인.
-		System.out.printf("%.20f\n",num5);
+		System.out.printf("%.20f.\n",num5);
 		
 		//10진수 표현이 아닌 값을 정수에 저장하는 예제
 		int num6 = 0x10; //0x붙는 것은 16\진수 => 16진수 10 = 16임
