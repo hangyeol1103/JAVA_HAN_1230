@@ -25,7 +25,7 @@ public class Ex01_OperatorLogical {
 		System.out.println(age + "살은 성인입니까?" + isAdult);
 		//나이가 19세이상이 아니면 청소년으로 판별하는 예제(!연산자 이용)
 		System.out.println(age + "살은 미성년자입니까?" + !isAdult);
-		// not(!)연산자는 원하는 결과를 반대로 할 때 사용하면 된다.
+		//not(!)연산자는 원하는 결과를 반대로 할 때 사용하면 된다.
 		
 		//정수가 0이상인지 판별하는 예제(||연산자)
 		int num = 10;
