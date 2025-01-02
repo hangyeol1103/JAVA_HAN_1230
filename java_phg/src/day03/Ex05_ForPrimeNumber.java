@@ -34,6 +34,8 @@ public class Ex05_ForPrimeNumber {
 			System.out.println(num + "는 소수가 아닙니다.");
 		}
 		
+		
+		
 		/* 반복횟수 : i는 1부터 num까지 1씩 증가
 		 * 규칙성 : i가 num의 약수이면 약수의 개수인 count를 1증가
 		 * 반복문 종료 후 : count가 2이면 소수, 아니면 소수가 아님이라고 출력
