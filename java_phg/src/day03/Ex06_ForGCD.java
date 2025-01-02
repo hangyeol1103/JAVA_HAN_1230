@@ -23,19 +23,20 @@ public class Ex06_ForGCD {
 		
 		Scanner scan = new Scanner(System.in);
 		System.out.println(" 두 정수를 입력하세요 : ");
-		
 		int num1 = scan.nextInt();
 		int num2 = scan.nextInt();
 		int gcd =1;
 		
 		for(int i=1; i<=num1; i++)
 		{
-			if (num1 % i == 0 && num2 % i == 0) {
+			if( num1 % i == 0 && num2 % i == 0)
+			{
 				gcd = i;
-				System.out.println(num1 + "과 " + num2 + "의 공약수 : " + gcd);
 			}
 		}
-		System.out.println(num1 + "과 " + num2 + "의 최대 공약수 : " + gcd);
+		System.out.println(gcd);
+		
+		
 		
 		
 	}
