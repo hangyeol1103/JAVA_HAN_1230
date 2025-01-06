@@ -8,7 +8,8 @@ public class Ex05_static2 {
 		Ex05_static2 s = new Ex05_static2(); //이 과정이 없다면 sum2를 print하는 과정에서 오류가 생김.
 		System.out.println(s.sum2(1,2));
 		
-		Ex01_Day04_Homework.main(args);
+		Ex01_Day04_Homework.main(args); //Ex01_Day04_Homework의 예제를 형식에 맞게 입력하면 여기서 동작 가능.
+		
 	}
 	public static int sum1(int num1, int num2) {
 		return num1 + num2;
