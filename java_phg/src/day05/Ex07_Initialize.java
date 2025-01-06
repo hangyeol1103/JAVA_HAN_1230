@@ -9,6 +9,15 @@ public class Ex07_Initialize {
 		System.out.println(p.x3 + ", " + p.y3);
 		System.out.println(p.x4 + ", " + p.y4);
 		
+		//복사 생성자를 이용하여 객체를 생성
+		Point p2 = new Point(p);
+		
+		p.x1 =100;
+		
+		System.out.println(p2.x1 + ", " + p2.y1);
+		System.out.println(p2.x2 + ", " + p2.y2);
+		System.out.println(p2.x3 + ", " + p2.y3);
+		System.out.println(p2.x4 + ", " + p2.y4);
 	}
 
 }
@@ -38,4 +47,16 @@ class Point{
 		y4 = 3;
 		x4 = 3;
 	}
+	public Point(Point p) {
+		x1 = p.x1;
+		y1 = p.y1;
+		x2 = p.x2;
+		y2 = p.y2;
+		x3 = p.x3;
+		y3 = p.y3;
+		x4 = p.x4;
+		y4 = p.y4;
+		
+	}
+	
 }
