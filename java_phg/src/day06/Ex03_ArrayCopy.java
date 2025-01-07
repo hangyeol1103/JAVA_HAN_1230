@@ -8,13 +8,13 @@ public class Ex03_ArrayCopy {
 		
 		/* arr1에 있는 값을 arr2에 복사하는 코드를 작성하세요. */
 		print(arr1);
-		arr2 = new int[arr1.length];
+		arr2 = new int[arr1.length]; // 새롭게 만든것을 서로 '공유'하는 것이기 때문에
 		 
 		//반복문을 이용하여 복사
 		for(int i = 0; i<arr1.length; i++) {
 			arr2[i] = arr1[i];
 		}
-		arr2 = arr1;
+		arr2 = arr1; // 복사본을 만들어서 그 복사본의 값을 바꾸는 것임
 		arr1[0] = 10;
 		print(arr2);
 		
