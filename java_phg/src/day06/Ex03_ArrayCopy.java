@@ -14,6 +14,7 @@ public class Ex03_ArrayCopy {
 		for(int i = 0; i<arr1.length; i++) {
 			arr2[i] = arr1[i];
 		}
+		arr2 = arr1;
 		arr1[0] = 10;
 		print(arr2);
 		
