@@ -95,7 +95,7 @@ public class Ex06_AccountBook {
 			//선택한 메뉴에 따른 기능 실행
 			System.out.println("------------------");
 			switch(menu) {
-			case 1:
+			case 1:{
 				//내역 정보들을 입력
 				System.out.print("수입/지출 : ");
 				String income = scan.next();
@@ -112,33 +112,51 @@ public class Ex06_AccountBook {
 				list[count] = new Item(income, type, content, money, data);
 				count++;
 				break;
-			case 2:
+			}
+			case 2:{
+				//등록된 내역이 없는데 수정하려고 하는 경우의 예외 처리를 해줘야 함.
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//내역들을 출력
 				for(int i = 0; i < count; i++) {
 					list[i].print(i+1);
 				}
 				//수정할 내역의 숫자를 입력
-				System.out.println("수정할 내역의 번호를 선택하세요 : ");
+				System.out.print("수정할 내역의 번호를 선택하세요 : ");
 				int num = scan.nextInt();
+				//int index = scan.nextInt() - 1;
 				//금액을 입력
-				System.out.println(" 금액 :");
-				money = scan.nextInt();
+				System.out.print(" 금액 :");
+				int money = scan.nextInt();
 				//입력받은 숫자 -1번지에 있는 금액을 수정
-				int index = 0;
-				for(int i = 0; i<count; i++) {
-						list[i] = list[count-1];
-					}
+				list[num - 1].setMoney(money);
+				//list[index].setMoney(money);   129번째 줄을 통해 135번째로 선언하는 것으로도 코딩 가능.
+				System.out.println("내역이 수정되었습니다.");
 				break;
-			case 3:
+			} //괄호를 통해 지역변수로 써짐 각각의 지역변수로 써 case1의 int money로 선언했어도 case2에서도 따로 선언 해줘야 함.
+			case 3:{
+				//등록된 내역이 없는데 삭제하려고 하는 경우의 예외 처리를 해줘야 함.
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//내역들을 출력
-				
+				for(int i = 0; i < count; i++) {
+					list[i].print(i+1);
+				}
 				//삭제할 내역의 숫자를 입력
-				
+				System.out.println("삭제할 내역의 번호를 입력하세요 : ");
+				int index = scan.nextInt() - 1;
 				//입력받은 숫자 번지부터 앞으로 한칸씩 당김
-				
+				for(int i = index + 1; i < count; i++) {
+					list[i-1] = list[i];
+				}
 				//개수를 1감소
-				
+				count--;
 				break;
+			}
 			case 4:
 				//반복문을 이용하여 저장된 내역들을 숫자와 함께 출력. 숫자는 1부터 시작
 				for(int i = 0; i <count; i++) {
