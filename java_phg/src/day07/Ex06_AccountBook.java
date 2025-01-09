@@ -155,9 +155,14 @@ public class Ex06_AccountBook {
 				}
 				//개수를 1감소
 				count--;
+				System.out.println("내역을 삭제했습니다.");
 				break;
 			}
 			case 4:
+				if(count == 0) {
+					System.out.println("등록된 내역이 없습니다.");
+					break;
+				}
 				//반복문을 이용하여 저장된 내역들을 숫자와 함께 출력. 숫자는 1부터 시작
 				for(int i = 0; i <count; i++) {
 					list[i].print(i+1);
