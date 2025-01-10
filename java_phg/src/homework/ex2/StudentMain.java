@@ -1,7 +1,11 @@
 package homework.ex2;
 
+import java.util.Scanner;
+
 public class StudentMain {
 
+	static Scanner scan = new Scanner(System.in);
+	
 	/* 학생 성적 관리 프로그램을 작성하세요.
 	 * 1. 학생 등록
 	 * 	- 학년, 반, 번호, 이름을 입력받아 등록
@@ -45,6 +49,39 @@ public class StudentMain {
 		int subjectCount = 0;
 		Student tmp = new Student();
 		System.out.println(tmp);
+		
+		int menu = 0;
+		
+		do {
+			printMenu();
+			
+			
+		}while(menu !=13);
+		
+		
+		
+		
+	}
+	
+	static public void printMenu() {
+		System.out.println("-------------------");
+		System.out.println("1.학생 등록");
+		System.out.println("2.학생 수정");
+		System.out.println("3.학생 삭제");
+		System.out.println("4.과목 등록");
+		System.out.println("5.과목 수정");
+		System.out.println("6.과목 삭제");
+		System.out.println("7.성적 등록");
+		System.out.println("8.성적 수정");
+		System.out.println("9.성적 삭제");
+		System.out.println("10.학생 조회");
+		System.out.println("11.과목 조회");
+		System.out.println("12.성적 조회");
+		System.out.println("-------------------");
+		System.out.println("메뉴 입력 : ");
+		System.out.println("-------------------");
+		int menu = scan.nextInt();
+		
 	}
 
 }
