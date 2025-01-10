@@ -50,10 +50,16 @@ public class StudentMain {
 		Student tmp = new Student();
 		System.out.println(tmp);
 		
+		
+		
 		int menu = 0;
 		
 		do {
+			//메뉴 출력
 			printMenu();
+			//메뉴 입력
+			menu = scan.nextInt();
+			//
 			
 			
 		}while(menu !=13);
@@ -80,8 +86,6 @@ public class StudentMain {
 		System.out.println("-------------------");
 		System.out.println("메뉴 입력 : ");
 		System.out.println("-------------------");
-		int menu = scan.nextInt();
-		
 	}
 
 }
