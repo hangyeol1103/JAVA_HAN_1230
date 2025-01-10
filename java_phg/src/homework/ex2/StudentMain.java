@@ -40,7 +40,7 @@ public class StudentMain {
 	public static void main(String[] args) {
 		
 		Student [] stdList;
-		Subject [] subjectList; //등목된 과목들
+		Subject [] subjectList; //등록된 과목들
 		int stdCount = 0;
 		int subjectCount = 0;
 		Student tmp = new Student();
