@@ -55,6 +55,7 @@ public class Ex11_Map {
 		System.out.println(map.remove("qwe1234", "qwabc123"));
 		System.out.println("삭제 후");
 		System.out.println(map);
+		
 	}
 
 }

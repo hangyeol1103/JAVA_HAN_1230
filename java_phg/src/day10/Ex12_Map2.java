@@ -46,6 +46,7 @@ public class Ex12_Map2 {
 			String id =entry.getKey();
 			String pw = entry.getValue();
 			System.out.println(id + " : " + pw);
+			
 		}
 	}
 
