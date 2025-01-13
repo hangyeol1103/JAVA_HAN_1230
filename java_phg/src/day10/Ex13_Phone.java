@@ -1,7 +1,11 @@
 package day10;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 public class Ex13_Phone {
 
@@ -24,7 +28,7 @@ public class Ex13_Phone {
 	 * - 이름이 포함된 전화번호를 출력
 	 * */
 	static Scanner scan = new Scanner(System.in);
-	static HashMap<String, String> map = new HashMap<String, String>();
+	static HashMap<String, String> list = new HashMap<String, String>();
 	public static void main(String[] args) {
 		
 		int menu;
@@ -34,6 +38,7 @@ public class Ex13_Phone {
 			printMenu();
 			
 			menu = scan.nextInt();
+			scan.nextLine();
 			
 			runMenu(menu);			
 			
@@ -72,8 +77,14 @@ public class Ex13_Phone {
 		}
 	}
 	private static void insertNum() {
-		// TODO Auto-generated method stub
+		System.out.println("이름 : ");
+		String name = scan.nextLine();
 		
+		System.out.println("전화번호 : ");
+		String phoneNumber = scan.nextLine();
+		
+		list.put(name,phoneNumber);
+		System.out.println(list);
 	}
 	private static void updateNum() {
 		// TODO Auto-generated method stub
@@ -84,9 +95,38 @@ public class Ex13_Phone {
 		
 	}
 	private static void searchNum() {
-		// TODO Auto-generated method stub
+		System.out.println("이름 : ");
+		String name = scan.nextLine();
 		
+		if(list.get(name) == name) {
+			System.out.println(list);
+		}else {
+			System.out.println("등록되지 않은 이름입니다.");
+		}
 	}
 
+}
+
+@Data
+@AllArgsConstructor
+class Num {
+	private String name, phoneNumber;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Num other = (Num) obj;
+		return Objects.equals(name, other.name);
+	}
+
+	@Override
+	public String toString() {
+		return name + " : " + phoneNumber;
+	}
 	
 }
