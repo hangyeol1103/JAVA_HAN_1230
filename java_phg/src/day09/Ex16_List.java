@@ -27,7 +27,7 @@ public class Ex16_List {
 		System.out.println(list);
 		
 		list.remove((Integer)20); //20이 두개가 있다면 앞에꺼부터 지움.
-		//Integer을 붙힌 이유는 collection 프테임워크에서 지원하는 remove(int)와 
+		//Integer을 붙힌 이유는 collection 프레임워크에서 지원하는 remove(int)와 
 		//list에서 지원하는 remove(integer)가 차이가 있어서
 		
 		System.out.println(list);
