@@ -99,7 +99,7 @@ public class Ex03_ToDoList {
 		}
 		//삭제할 번호 입력
 		System.out.print("삭제할 할일 번호 선택 : ");
-		int index = scan.nextInt() - 1; //1번지가 아니라 0번지 부터 해야되기 때문에 -1
+		int index = scan.nextInt(); //1번지가 아니라 0번지 부터 해야되기 때문에 -1
 		
 		if(index >= list.size() || index <0) { //등록된 번호는 1,2인데 1,2를 제외한 다른 번호를 입력한 경우의 예외 처리
 			System.out.println("잘못된 번호입니다.");
