@@ -3,6 +3,7 @@ package kr.kh.spring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.kh.spring.model.dto.PersonDTO;
@@ -59,7 +60,7 @@ public class HomeController {
 		System.out.println("화면에서 보낸 이름과 나이 : " + person);
 		// 서버에서 화면으로 객체를 전송
 		model.addAttribute("person", person);
-		return "sample/send";
+		return "sample/send";  
 	}
 	/*
 	@GetMapping("/send")
@@ -78,5 +79,10 @@ public class HomeController {
 		return "sample/send";
 	}
 	*/
-	
+	@GetMapping("/{name}/{age}") //PathVariable 들어갈 땐 경로상에 변수 이름을 써주면 됨.
+	public String nameAge(@PathVariable("name")String name1, @PathVariable("age")int age1) {
+		System.out.println("화면에서 전송한 이름 : " + name1);
+		System.out.println("화면에서 전송한 나이 : " + age1);
+		return "sample/send";
+	}
 }
