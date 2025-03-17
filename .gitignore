@@ -56,3 +56,4 @@ node_modules
 /.kotlin/
 
 test/
+*.zip
