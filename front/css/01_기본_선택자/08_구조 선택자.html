@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>구조 선택자</title>
+	<style>
+		/* 
+		일반 구조 선택자
+		- 요소 종류 상관없이 형제 요소들 중 몇 번째 요소인지 선택하는 선택자
+
+		nth-child(n)
+		- 앞에서 n번째 형제 요소
+		- 숫자가 오면 숫자번째 형제 요소
+		- 수식이 오면 수식에 맞는 형제 요소.
+			- nth-child(2n) : 짝수번째 요소
+			- nth-child(2n+1) : 홀수번째 요소
+			
+		:nth-last-child(n)
+			- 뒤에서 n번째 형제 요소
+		
+		:first-child,
+		:nth-child(1)
+		- 첫 번째 형제 요소
+
+		:last-child,
+		:nth-last-child(1)
+		- 마지막 형제 요소
+		*/
+		/* span태그와 p태그 즉, 종류가 다른거랑 상관없이 같은 형제로써 그대로 진행됨.
+		span은 span끼리 p는 p끼리 이런 것 아님. */
+		/* .box1 .list :nth-child(1) {color: red;} */
+		/* .box1 .list :first-child {color: red;} */
+		/* .box1 .list :nth-child(2n){color: red;} */
+		.box1 .list :last-child{color: red;}
+
+		/* 
+		형태 구조 선택자
+		- 선택자와 일치하는 형제 요소들 중 몇 번째 요소인지를 선택 (위의 일반 구조 선택자와 다르게 종류 상관 있다. 즉, 종류에 따라)
+		- 이 때, 선택자는 태그 선택자만 가능
+
+		선택자:nth-of-type(n)
+		- 선택자 형제들 중에서 n번째 요소
+			- n이 숫자 : n번째
+			- n이 수식 : 수식 번째마다 있는 요소 선택
+
+		선택자:first-of-type
+		- 선택자 형제들 중에서 첫번째 요소
+
+		선택자:last-of-type
+		- 선택자 형제들 중에서 마지막 요소
+
+		선택자:nth-last-of-type(n)
+		- 선택자 형제들 중에서 n번째 요소소
+		*/
+		/* .box2 .list span:first-of-type{color: red;} */
+		/* .box2 .list p:first-of-type{color: red;} */
+		/* .box2 .list span:nth-of-type(2n+1){color: red;}
+		설명 -> span태그 자체가 1,3,5인데 span태그 입장에선 1,2,3순으로 봐진다면 2번째 순서인 3 값을 뺀 나머지가 red 처리
+		*/
+		.box2 .list p:last-of-type{color: red;}
+		.box2 .list span:nth-of-type(2){color: blue;}
+		/* p태그는 2,4인데 p태그 기준으로 1,2로 세팅 근데 2번째에 해당하는 4가 last임 따라서 4가 red 처리 */
+		</style>
+</head>
+<body>
+	<div class="box1">
+		<div class="list">
+			<span class="item">1</span>
+			<p class="item">2</p>
+			<span class="item">3</span>
+			<p class="item">4</p>
+			<span class="item">5</span>
+		</div>
+	</div>
+	<hr>
+	<div class="box2">
+		<div class="list">
+			<span class="item">1</span>
+			<p class="item">2</p>
+			<span class="item">3</span>
+			<p class="item">4</p>
+			<span class="item">5</span>
+		</div>
+	</div>
+</body>
+</html>

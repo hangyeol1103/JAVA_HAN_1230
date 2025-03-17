@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴 구성 예제</title>
+	<style>
+		.box{
+			width: 100px; height: 100px; border: 3px solid black;
+			box-sizing: content-box; display: inline-block; float: left; position: relative;
+		}
+		.container1 > .box {
+			text-decoration: none; color: black;
+			text-align: center; line-height: 100px; font-size: 20px; font-weight: bold;
+			list-style: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="container1">
+		<a href="#" class="box box1">
+			<ul>
+				<li>목록1</li>
+			</ul>
+		</a>
+		<a href="#" class="box box2">
+			<ul>
+				<li>목록2</li>
+			</ul>
+		</a>
+		<a href="#" class="box box3">
+			<ul>
+				<li>목록3</li>
+			</ul>
+		</a>
+	</div>
+</body>
+</html>

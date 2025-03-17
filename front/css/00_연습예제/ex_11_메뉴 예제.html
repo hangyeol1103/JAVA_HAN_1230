@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메뉴 예제</title>
+	<style>
+		/* 어차피 모든 태그에 패딩 마진을 직접 계산해서 할 거 아니면 그냥 밑에 코드를 디폴트 해놓고 시작한다 하심 강사님은 */
+		*{ padding: 0; margin: 0; }
+		.menu-list{
+			list-style: none;
+		}
+		/* 컨텐츠가 메뉴와 겹치는 문제 해결을 위한 코드이며 거의 공식이다 하셨음. */
+		.menu-list::after{
+			content: ''; display: block; clear: both;
+		}
+		.menu-item{
+			border: 2px solid black;
+			/* width로 3등분하기 위해 33.333% 혹은 calc(100%/3)이런 식으로? */
+			width: 33.333333%; height: 50px;
+			/* float : left;만 할 시에 메뉴 3은 안넘어감, 테두리때문에
+			width 33.33333%가 테두리를 제외한 것이기에 box-sizing:border-box로 테두리를 포함시켜서
+			width가 33.33333%가 되게 해줘야 한다. */
+			/* 강사님 한줄 -> 테두리 때문에 밀리는 현상을 막기 위해 테두리 포함한 너비가 1/3이 되도록 */
+			float: left; box-sizing: border-box;
+		}
+		/* 두번째 메뉴부터 왼쪽 테두리를 없앰 */
+		.menu-item+.menu-item{
+			border-left: 0;
+		}
+		.menu-link:hover{
+			background-color: yellow;
+		}
+		.menu-link{
+			/* 너비, 높이를 부모의 100%로 설정했는데, 
+			a태그는 inline이기 때문에 마진이나 크기 높이가 안바뀜.
+			따라서 display를 block로 변경해줌. */
+			width: 100%; height: 100%; display: block;
+			/* 글자를 좌우 가운데로 배치 */
+			text-align: center; 
+			/* 글자를 상하 가운데로 배치, line-heigth는 한 줄의 높이를 어떻게 할거냐 임. */
+			line-height: 46px;
+			text-decoration: none;
+			/* 글자색을 검정으로, 크기를 30px, 두께를 bold */
+			/* 참고로 color를 부모임 li 태그에 넣어도 상속은 되지만 자식 새끼는 지꺼를 씀. 따라서 글자 색깔이 안바뀜. */
+			color: black; font-size: 30px; font-weight: bold;
+		}
+		.container{
+			background-color: gray; height: 200px;
+		}
+	</style>
+</head>
+<body>
+	<nav>
+		<ul class="menu-list">
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴1</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴2</a>
+			</li>
+			<li class="menu-item">
+				<a href="#" class="menu-link">메뉴3</a>
+			</li>
+		</ul>
+	</nav>
+	<div class="container"></div>
+</body>
+</html>
