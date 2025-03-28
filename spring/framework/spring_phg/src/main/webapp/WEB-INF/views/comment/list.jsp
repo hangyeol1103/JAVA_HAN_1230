@@ -14,19 +14,26 @@
 			<c:forEach items="${list}" var="comment">
  				<div class="<c:if test="${comment.co_num != comment.co_ori_num}">pl-5</c:if>">
 		 			<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
-		 				<div class="comment-wrap">
-		 					<div class="comment-writer">${comment.co_me_id}</div>
-		 					<div class="comment-content">${comment.co_content}</div>
-		 				</div>
-		 				<div class="comment-func mt-2">
-		 					<c:if test="${comment.co_num == comment.co_ori_num}">
-		 						<button class="btn btn-outline-success btn-reply" data-num="${comment.co_num}">답글</button>
-		 					</c:if>
-		 					<c:if test="${comment.co_me_id == user.me_id}">
-			 					<button class="btn btn-outline-warning">수정</button>
-			 					<button class="btn btn-outline-danger" >삭제</button>
-			 				</c:if>
-		 				</div>
+		 				<c:choose>
+		 					<c:when test="${comment.co_del eq 'N'}">
+				 				<div class="comment-wrap">
+				 					<div class="comment-writer">${comment.co_me_id}</div>
+				 					<div class="comment-content">${comment.co_content}</div>
+				 				</div>
+				 				<div class="comment-func mt-2">
+				 					<c:if test="${comment.co_num == comment.co_ori_num}">
+				 						<button class="btn btn-outline-success btn-reply" data-num="${comment.co_num}">답글</button>
+				 					</c:if>
+				 					<c:if test="${comment.co_me_id == user.me_id}">
+					 					<button class="btn btn-outline-warning">수정</button>
+					 					<button class="btn btn-outline-danger btn-delete" data-num="${comment.co_num}" >삭제</button>
+					 				</c:if>
+				 				</div>
+			 				</c:when>
+			 				<c:otherwise>
+			 					<div>작성자에 의해 삭제된 댓글입니다.</div>
+			 				</c:otherwise>
+		 				</c:choose>
 		 			</div>
  				</div>
  			</c:forEach>
@@ -34,7 +41,25 @@
  				<div class="text-center">등록된 댓글이 없습니다.</div>
  			</c:if>
  		</div>
- 		<div class="comment-pagination"></div>
+ 		<div class="comment-pagination">
+ 			<ul class="pagination justify-content-center">
+			   <c:if test="${pm.prev}">
+				   <li class="page-item">
+				   		<a class="page-link" href="javascript:void(0);" data-page="${pm.startPage-1}">이전</a>
+				   </li>
+			   </c:if>
+			   <c:forEach begin="${pm.startPage}" end="${pm.endPage}" var="i">
+				   <li class="page-item <c:if test="${pm.cri.page == i}">active</c:if>">
+				   		<a class="page-link" href="javascript:void(0);" data-page="${i}">${i}</a>
+				   </li>	   
+			   </c:forEach>
+			   <c:if test="${pm.next}">
+				   <li class="page-item">
+				   		<a class="page-link" href="javascript:void(0);" data-page="${pm.endPage+1}">다음</a>
+				   </li>
+			   </c:if>
+			</ul>
+ 		</div>
  		<div class="comment-insert-box">
  		<form class="input-group mb-3 insert-form" action="<c:url value="/comment/insert"/>" method="post">
  		    <input type="hidden" name="co_po_num" value="${pm.cri.search}">
@@ -42,11 +67,39 @@
  		    <button class="btn btn-outline-success"> 댓글 등록</button>
  		</form>
  		</div>
- 	
- 	<!-- 삭제 등록 -->
- 	<script type="text/javascript">
  		
- 	</script>
+ 		<!-- 페이지 클릭 이벤트 등록 -->
+ 		<script type="text/javascript">
+ 			$(".comment-pagination .page-link").click(function(e){
+ 				let page = $(this).data("page");
+ 				cri.page = page;
+ 				getCommentList(cri);
+ 			});
+ 		</script>
+ 	
+	 	<!-- 삭제 등록 -->
+	 	<script type="text/javascript">
+	 		$(".btn-delete").click(function(e){
+	 			let co_num = $(this).data("num");
+	 			$.ajax({
+	 				async : true, 
+	 				url : "<c:url value="/comment/delete"/>",   
+	 				type : 'post', 
+	 				data : {co_num : co_num}, 
+	 				success : function (data){
+	 					if(data){
+	 						alert("댓글을 삭제했습니다.");
+	 						getCommentList(cri);
+	 					}else{
+	 						alert("댓글을 삭제하지 못했습니다.");
+	 					}
+	 				}, 
+	 				error : function(jqXHR, textStatus, errorThrown){
+	 
+	 				}
+	 			});
+	 		});
+	 	</script>
  	
  	<!-- 답글 클릭 등록 -->
  	<script type="text/javascript">
@@ -108,7 +161,7 @@
  				success : function (data){
  					if(data){
  						alert("댓글을 등록했습니다.");
- 						getCommentList();
+ 						getCommentList(cri);
  					}else{
  						alert("댓글을 등록하지 못했습니다.");
  					}

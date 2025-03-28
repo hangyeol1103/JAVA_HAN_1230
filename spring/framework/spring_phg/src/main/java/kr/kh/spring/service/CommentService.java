@@ -14,5 +14,7 @@ import kr.kh.spring.paginagion.PageMaker;
 	List<CommentVO> getCommentList(Criteria cri);
 
 	PageMaker getPageMaker(Criteria cri);
+
+	boolean deleteComment(int co_num, MemberVO user);
  
  }
