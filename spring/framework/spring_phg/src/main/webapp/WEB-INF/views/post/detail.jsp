@@ -35,6 +35,10 @@
  					<label for="title" class="form-label">조회수</label>
  					<input type="text" class="form-control" value="${post.po_view}" readonly>
  				</div>
+ 				<div class="form-group mt-3 d-flex justify-content-center" id="btns">
+ 					<button class="btn btn<c:if test="${like.li_state ne 1}">-outline</c:if>-success btn-up" data-state="1">추천(<span>${post.po_up}</span>)</button>
+ 					<button class="btn btn<c:if test="${like.li_state ne -1}">-outline</c:if>-danger ml-3 btn-down" data-state="-1">비추천(<span>${post.po_down}</span>)</button>
+ 				</div>
  				<div class="form-group mt-3">
  					<label for="content" class="form-label">내용</label>
  					<div class="form-control" id="content" style="min-height: 400px;">${post.po_content }</div>
@@ -92,55 +96,78 @@
  		}
  		
  		getCommentList(cri);
- 		function drawCommentList(list){
+ 	</script>
+ 	<script type="text/javascript">
+ 		//추천/비추천 버튼 클릭 이벤트 등록
+ 		$(document).on("click", ".btn-up, .btn-down", function(e){
  			
- 			if(list.length == 0){
- 				$(".comment-list").html(`<div class="text-center mb-3">등록된 게시글이 없습니다.</div>`)
+ 			if(${user == null}){
+ 				if(confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하겠습니까?")){
+ 					location.href= "<c:url value="/login"/>";
+ 				}
  				return;
  			}
+ 			let state = $(this).data("state");
+ 			let num = "${post.po_num}";
  			
- 			let str = '';
- 			for(comment of list){
- 				let btns = '';
- 				let replyBtn = '';
- 				let padding = '';
- 				
- 				//회원이 댓글/답글 작성자이면 수정/삭제버튼 추가
- 				if(comment.co_me_id == '${user.me_id}'){
- 					btns = `
- 						<button class="btn btn-outline-warning">수정</button>
- 						<button class="btn btn-outline-danger" >삭제</button>
- 					`;
- 				}
- 				
- 				//댓글이면 답글 버튼 추가
- 				if(comment.co_num == comment.co_ori_num){
- 					replyBtn = `<button class="btn btn-outline-success btn-reply" data-num="\${comment.co_num}">답글</button>`;	
- 				}
- 				//답글이면 왼쪽 패딩 추가
- 				else{
- 					padding = 'pl-5';
- 				}
- 				
- 				str += `
- 					<div class="\${padding}">
-						<div class="comment-item form-control mb-3" style="min-height: auto; height: auto;">
-							<div class="comment-wrap">
-								<div class="comment-writer">\${comment.co_me_id}</div>
-								<div class="comment-content">\${comment.co_content}</div>
-							</div>
-							<div class="comment-func mt-2">
-								\${replyBtn}
-								\${btns}
-							</div>
- 						</div>
- 					</div>
- 				`
+ 			let like = {
+ 					li_po_num : num,
+ 					li_state : state
  			}
- 			$(".comment-list").html(str);
- 		}
+ 			$.ajax({
+ 				async : true,
+ 				url : '<c:url value="/post/like"/>', 
+ 				type : 'post', 
+ 				data : JSON.stringify(like), 
+ 				contentType : "application/json; charset=utf-8",
+ 				dataType : "json",
+ 				success : function (data){
+					let res = data.res;
+					let upCount = data.up;
+					let downCount = data.down;
+					drawUpDownBtns(res, upCount, downCount)
+ 					switch(res){
+					case -1:
+						alert("비추천 했습니다.");
+						break;
+					case 1:
+						alert("추천 했습니다.");
+						break;
+					case 0:
+						alert((state == 1?"추천":"비추천") + "을 취소했습니다.");
+						break;
+					default:
+						alert("추천/비추천을 하지 못했습니다.");
+					}
+ 				},
+ 				error : function(jqXHR, textStatus, errorThrown){
+ 
+ 				}
+ 			});
+ 		});
  		
- 		getCommentList();
+ 		function drawUpDownBtns(state, upCount, downCount){
+ 			$(".btn-up").removeClass("btn-outline-success");
+ 			$(".btn-up").removeClass("btn-success");
+ 			$(".btn-down").removeClass("btn-outline-danger");
+ 			$(".btn-down").removeClass("btn-danger");
+ 			//상태에 맞게 테두리 배경을 선택
+ 			switch(state){
+ 			case 1:
+ 				$(".btn-up").addClass("btn-success");
+ 				$(".btn-down").addClass("btn-outline-danger");
+ 				break;
+ 			case -1:
+ 				$(".btn-down").addClass("btn-danger");
+ 				$(".btn-up").addClass("btn-outline-success");
+ 			case 0:
+ 				$(".btn-up").addClass("btn-outline-success");
+ 				$(".btn-down").addClass("btn-outline-danger");
+ 			}
+ 			//추천 비추천수 업데이트
+ 			$(".btn-up span").text(upCount);
+ 			$(".btn-down span").text(downCount);
+ 		}
  	</script>
- 	
  </body>
+ </html>

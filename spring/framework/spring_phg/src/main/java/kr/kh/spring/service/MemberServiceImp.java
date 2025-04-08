@@ -63,5 +63,15 @@ package kr.kh.spring.service;
 		MemberVO user = memberDao.selectMember(id);
 		return user == null;
 	}
+
+	@Override
+	public void updateCookie(MemberVO user) {
+		memberDao.updateCookie(user);
+	}
+
+	@Override
+	public MemberVO getMemberByCookie(String cookieId) {
+		return memberDao.selectMemberByCookie(cookieId);
+	}
  
  }

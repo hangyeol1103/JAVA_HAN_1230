@@ -6,6 +6,7 @@ package kr.kh.spring.dao;
  
  import kr.kh.spring.model.vo.BoardVO;
 import kr.kh.spring.model.vo.FileVO;
+import kr.kh.spring.model.vo.LikeVO;
 import kr.kh.spring.model.vo.PostVO;
 import kr.kh.spring.paginagion.Criteria;
  
@@ -40,5 +41,13 @@ import kr.kh.spring.paginagion.Criteria;
 	FileVO selectFile(@Param("fi_num")int fi_num);
 
 	int selectCountPostList(@Param("cri")Criteria cri);
+
+	LikeVO selectLike(@Param("like")LikeVO like);
+
+	boolean insertLike(@Param("like")LikeVO like);
+
+	boolean updateLike(@Param("like")LikeVO like);
+
+	void updateUpDown(@Param("po_num")int po_num);
  
  }
