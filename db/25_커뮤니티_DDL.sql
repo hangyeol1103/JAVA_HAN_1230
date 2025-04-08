@@ -11,6 +11,8 @@ CREATE TABLE `MEMBER` (
 	`me_pw`	varchar(255) not	NULL,
 	`me_email`	varchar(255) not	NULL,
 	`me_authority`	varchar(5) default "USER" not	NULL
+    `me_cookie` varchar(255),
+    `me_limit` datetime
 );
 
 DROP TABLE IF EXISTS `BOARD`;
