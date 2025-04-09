@@ -11,6 +11,7 @@ function PostList(){
 		console.log(num);
 		fetch("/api/react/post/list?po_bo_num="+num)
 		.then(res=>res.json())
+		
 		.then(res=>{
 			setList(res.list);
 			setPm(res.pm);
