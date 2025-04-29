@@ -25,7 +25,16 @@ public class SecurityConfig {
 					.permitAll() //해당 로그인 페이지에 모두 접근 가능
 					.loginProcessingUrl("/loginPost") //로그인 동작을 어떠한 url통해 동작을 시작할 것인지. login.html의 action의 url과 맞춰야함.
 					.defaultSuccessUrl("/") // 성공했을 때 url을 어디로 할 것인지.
-			);
+			)
+			.logout(logout ->
+				logout
+					.logoutUrl("/logoutPost")
+					.logoutSuccessUrl("/")
+					.clearAuthentication(true)
+					.invalidateHttpSession(true)
+					.permitAll()
+				
+				);
 		return http.build();
 	}
 
