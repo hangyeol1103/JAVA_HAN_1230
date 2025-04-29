@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title th:replace="this :: title">Default Title</title>
@@ -28,18 +30,25 @@
 			</div>
 			<div>
 				<ul class="navbar-nav">
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/login}">로그인</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/signup}">회원가입</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/mypage}">마이 페이지</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" th:href="@{/logout}">로그아웃</a>
-					</li>
+					<!-- xmlns:sec="http://www.thymeleaf.org/extras/spring-security"를 추가한 후
+					 th:block을 통해 로그인 된 사용자는 마이페이지와 로그아웃이 보이게
+					 로그인이 안된 사용자는 로그인과 회원가입이 보이게끔 해준 것. -->
+					<th:block sec:authorize="isAnonymous()">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/login}">로그인</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/signup}">회원가입</a>
+						</li>
+					</th:block>
+					<th:block sec:authorize="isAuthenticated()">
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/mypage}" th:text="${#authentication.principal.user.me_id}+'님 페이지'">마이 페이지</a> <!-- 여기서 user는 customuser에서 private MemberVO user; 에서 user로 바꿨음.-->
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" th:href="@{/logout}">로그아웃</a>
+						</li>
+				</th:block>
 				</ul>
 			</div>
 			</nav>
