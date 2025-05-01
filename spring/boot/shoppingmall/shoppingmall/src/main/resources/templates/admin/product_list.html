@@ -47,11 +47,12 @@ layout:decorate="~{layout/admin_layout.html}">
 					<td th:text="${product.pr_price}"></td>
 					<td th:text="${product.pr_amount}"></td>
 					<td class="clearfix">
-						<a href="" class="btn btn-warning float-left">수정</a>
-						<form th:action="@{/admin/product/delete/{ca_num}/{pr_code}(ca_num=${product.pr_ca_num},pr_code=${product.pr_code})}"
-							method="post" class="float-right">
+						<a th:href="@{/admin/product/update/{ca_num}/{pr_code}(ca_num=${ca_num},pr_code=${product.pr_code})}" class="btn btn-warning float-left">수정</a>
+						<form th:action="@{/admin/product/delete/{ca_num}/{pr_code}(ca_num=${ca_num},pr_code=${product.pr_code})}"
+							method="post" class="float-left ml-2">
 							<button class="btn btn-danger">삭제</button>
 						</form>
+						<button class="btn btn-dark ml-2 btn-add" th:data-code="${product.pr_code}">입고</button> <!-- 여기서 data-code로 넘겨준것을 밑의 script가 받음음-->
 					</td>
 				</tr>
 				<tr th:if="${productList.size() == 0}">
@@ -59,6 +60,41 @@ layout:decorate="~{layout/admin_layout.html}">
 				</tr>
 			</tbody>
 		</table>
+		<script>
+			$(".btn-add").click(function (){
+			
+				var	amount = parseInt(prompt("입고 수량을 입력하세요."));
+				
+				if(isNaN(amount)){
+					alert("숫자만 입력하세요.");
+					return;
+				}
+				var code = $(this).data("code");
+				if(amount < 0){
+					alert("입고 수량은 0이상이어야 합니다.")
+					return;
+				}
+				$.ajax({
+					async : true,
+					url : "/admin/product/amount",
+					method : "post",
+					data : JSON.stringify({ //json으로 보냈기 때문에 post으로 밖에 안됨. mapping이
+						pr_code : code,
+						pr_amount : amount
+					}),
+					contentType : "application/json; charset=utf-8",
+					success : function(data){
+						if(data){
+							alert("입고했습니다.");
+							location.reload(); //새로고침 역할. 입고 시에 수동으로 새로고침 했어야 됐는데, 이 코드를 추가함으로써 자동으로 새로고침됨.
+						}
+						else{
+							alert("입고에 실패했습니다.");
+						}
+					}
+				})
+			})
+		</script>
 	</main>
 </body>
 </html>

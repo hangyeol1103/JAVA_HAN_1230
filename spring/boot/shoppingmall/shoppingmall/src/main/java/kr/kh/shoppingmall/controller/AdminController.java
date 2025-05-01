@@ -77,7 +77,7 @@ public class AdminController {
 	@PostMapping("/product/insert")
 	public String productInsertPost(ProductVO product, MultipartFile thumb) {
 		if(productService.insertProduct(product, thumb)){
-			return "redirect:/admin/product";//+product.getPr_ca_num();
+			return "redirect:/admin/product/" +product.getPr_ca_num();
 		}
 		return "redirect:/admin/product/insert/" +product.getPr_ca_num();
 	}
@@ -86,6 +86,27 @@ public class AdminController {
 	public String productDeletePost(@PathVariable String pr_code, @PathVariable int ca_num) {
 		productService.deleteProduct(pr_code);
 		return "redirect:/admin/product/" + ca_num;
+	}
+
+	@GetMapping("/product/update/{ca_num}/{pr_code}")
+	public String productUpdate(Model model, @PathVariable String pr_code, @PathVariable int ca_num) {
+		ProductVO product = productService.getProduct(pr_code, false);
+		model.addAttribute("product", product);
+		return "admin/product_update";
+	}
+	
+	@PostMapping("/product/update/{ca_num}")
+	public String productUpdatePost(ProductVO product, MultipartFile thumb, @PathVariable int ca_num) {
+		if(productService.updateProduct(product, thumb)){
+			return "redirect:/admin/product/" + ca_num;
+		}
+		return "redirect:/admin/product/update/" +product.getPr_code();
+	}
+
+	@PostMapping("/product/amount")
+	@ResponseBody
+	public boolean postMethodName(@RequestBody ProductVO product) {
+		return productService.updateAmount(product);
 	}
 	
 }

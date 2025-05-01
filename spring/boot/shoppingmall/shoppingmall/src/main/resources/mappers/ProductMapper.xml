@@ -39,8 +39,15 @@
  		update product set 
  			pr_title = #{pr_title}, 
  			pr_content = #{pr_content}, 
- 			pr_price = #{pr_price}, 
- 			pr_thumb = #{pr_thumb}, 
+ 			pr_price = #{pr_price},
+			<choose>
+				<when test="pr_thumb == null">
+					pr_thumb = pr_thumb,
+				</when>
+				<otherwise>
+					pr_thumb = #{pr_thumb},
+				</otherwise>
+			</choose> 
  			pr_amount = #{pr_amount},
  			pr_del = #{pr_del}
  		where pr_code = #{pr_code}
@@ -52,6 +59,6 @@
  		where ca_num = #{pr_ca_num}
 	</select>
 	<select id="selectProduct" resultType="ProductVO">
-		select * from product where pr_del = "N" and pr_code = #{pr_code}
+		select * from product where pr_code = #{pr_code}
 	</select>
 </mapper>
