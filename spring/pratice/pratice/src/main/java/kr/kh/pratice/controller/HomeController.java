@@ -1,5 +1,8 @@
 package kr.kh.pratice.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,21 @@ public class HomeController {
 	
 	@GetMapping("/test")
 	public String test(Model model) {
-		model.addAttribute("num", (int)(Math.random()*10));
+		int num = (int)(Math.random()*10);
+		String role = "";
+		switch (num) {
+			case 4,6,8:
+				role = "ADMIN";
+				break;
+			case 3,5,7,9:
+				role = "USER";
+				break;
+		}
+		
+		List<Integer> list = Arrays.asList(10,20,30,40);
+		model.addAttribute("num", num);
+		model.addAttribute("role", role);
+		model.addAttribute("items", list);
 		return "test";
 	}
 
